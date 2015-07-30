@@ -87,19 +87,36 @@ function pingWorkflow() {
     document.getElementById('pingArea').value = xhr.responseText;    
 }
 
-function submitWorkflow() {
-    var reqText = 'http://129.79.44.236:8080/va-workflow-2.0.0-SNAPSHOT/service/publishRO/'
-     + document.getElementById('ROSelect').value;
+function getMetadata() {
+    var reqText = document.getElementById('instanceSelect').value
+        + '/resteasy/collections/' + document.getElementById('ROSelect').value + '/unique';
+    document.getElementById('pingArea').value = reqText; 
     var xhr = new XMLHttpRequest();
     xhr.open("GET", reqText, false);
     xhr.setRequestHeader('Content-Type', 'text/plain');
     xhr.send();
 
-    document.getElementById('submitArea').value = "<no results>";
+    document.getElementById('DataArea').value = "<no results>";
 
     parser=new DOMParser();
     var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
-    document.getElementById('submitArea').value = xhr.responseText;    
+    document.getElementById('DataArea').value = xhr.responseText;    
+}
+
+function submitWorkflow() {
+    var reqText = 'http://129.79.44.236:8080/va-workflow-2.0.0-SNAPSHOT/service/publishRO/'
+        + document.getElementById('ROSelect').value + '?psId=' + document.getElementById("instanceSelect").selectedIndex;
+        document.getElementById('pingArea').value = reqText; 
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", reqText, false);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.send();
+
+    document.getElementById('DataArea').value = "<no results>";
+
+    parser=new DOMParser();
+    var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
+    document.getElementById('DataArea').value = xhr.responseText;    
 }
 
 </script>    
@@ -118,17 +135,27 @@ function submitWorkflow() {
 <div id="myoutercontainer">
 
         &nbsp;
-    <button id="workflow-button" onclick="submitWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Intent to Publish</button>   
+    <button id="workflow-button" onclick="getMetadata()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Get Metadata</button>   
         &nbsp;
+    <button id="workflow-button" onclick="submitWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Intent to Publish</button>   
+        &nbsp;    
     <select id="ROSelect">
-        <option selected disabled>Available for Testing:</option>
-        <option value="tag:medici@uiuc.edu,2009:col_SqW5XUYSfhZ627ghxBfaMQ?psId=1 ">demo1</option>
+        <option selected disabled>Select a Research Object:</option>
+        <option value="tag:medici@uiuc.edu,2009:col_SqW5XUYSfhZ627ghxBfaMQ">demo1</option>
         <option value="tag:medici@uiuc.edu,2009:col_sdU-5eGX8Pc9mq-IZ0GfKg">Dharma's IDCC 2015 collection</option>
         <option value="tag:medici@uiuc.edu,2009:col_y6NZYYfVgEfkAAY8bto9ng">1261_bundle</option>
         <option value="x">Some messed up RO to test errors</option>
     </select>    
         &nbsp;
-    <textarea readonly id="submitArea" name="submitArea" rows="1" cols="30">&nbsp; </textarea> 
+        <select id="instanceSelect">
+        <option selected disabled>Select a Test Site:</option>
+        <option value="https://sead-test.ncsa.illinois.edu/acr">SEAD Beta Test Site</option>
+        <option value="https://nced.ncsa.illinois.edu/acr">National Center for Earth-surface Dynamics</option>
+        <option value="https://sen.ncsa.illinois.edu/acr">Sediment Experimentalist Network</option>
+        <option value="x">Some messed up RO to test errors</option>
+    </select>    
+        &nbsp;
+    <textarea readonly id="DataArea" name="DataArea" rows="15" cols="60">&nbsp; </textarea> 
     <p></p>
 </div>       
     
