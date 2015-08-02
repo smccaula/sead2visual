@@ -74,7 +74,7 @@
 <script type=text/javascript>
 
 function pingWorkflow() {
-    var reqText = 'http://129.79.44.236:8080/va-workflow-2.0.0-SNAPSHOT/service/ping';
+    var reqText = 'http://129.79.44.236:8180/va-workflow/service/ping';
     var xhr = new XMLHttpRequest();
     xhr.open("GET", reqText, false);
     xhr.setRequestHeader('Content-Type', 'text/plain');
@@ -104,7 +104,7 @@ function getMetadata() {
 }
 
 function submitWorkflow() {
-    var reqText = 'http://129.79.44.236:8080/va-workflow-2.0.0-SNAPSHOT/service/publishRO/'
+    var reqText = 'http://129.79.44.236:8180/va-workflow/service/publishRO/'
         + document.getElementById('ROSelect').value + '?psId=' + document.getElementById("instanceSelect").selectedIndex;
         document.getElementById('pingArea').value = reqText; 
     var xhr = new XMLHttpRequest();
@@ -119,6 +119,11 @@ function submitWorkflow() {
     document.getElementById('DataArea').value = xhr.responseText;    
 }
 
+function OpenInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
+
 </script>    
     
 <div id="myoutercontainer">
@@ -127,7 +132,11 @@ function submitWorkflow() {
 
     &nbsp;
     <button id="workflow-button" onclick="pingWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Ping Workflow</button>
-        &nbsp;
+    &nbsp;
+    <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_MMtest')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
+    &nbsp;
+    <button id="workflow-button" onclick="OpenInNewTab('http://129.79.44.236:8180/examples/jsp/graph.html')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
+    &nbsp;    
     <textarea readonly id="pingArea" name="pingArea" rows="1" cols="30">&nbsp; </textarea> 
     <p></p>
 </div>    
