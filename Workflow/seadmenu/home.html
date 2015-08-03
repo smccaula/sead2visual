@@ -73,30 +73,31 @@
    
 <script type=text/javascript>
 
+var ROID = "";
+
 function pingWorkflow() {
-    var reqText = 'http://129.79.44.236:8180/va-workflow/service/ping';
+    var reqText = 'http://bl-uits-dsmcib2.ads.iu.edu:8180/va-workflow/service/ping';
     var xhr = new XMLHttpRequest();
+    document.getElementById('pingArea').value = reqText;    
+    document.getElementById('DataArea').value = "<no results>";    
     xhr.open("GET", reqText, false);
     xhr.setRequestHeader('Content-Type', 'text/plain');
     xhr.send();
-
-    document.getElementById('pingArea').value = "<no results>";
-
+    
     parser=new DOMParser();
     var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
-    document.getElementById('pingArea').value = xhr.responseText;    
+    document.getElementById('DataArea').value = xhr.responseText;    
 }
 
 function getMetadata() {
     var reqText = document.getElementById('instanceSelect').value
         + '/resteasy/collections/' + document.getElementById('ROSelect').value + '/unique';
     document.getElementById('pingArea').value = reqText; 
+    document.getElementById('DataArea').value = "<no results>";
     var xhr = new XMLHttpRequest();
     xhr.open("GET", reqText, false);
     xhr.setRequestHeader('Content-Type', 'text/plain');
     xhr.send();
-
-    document.getElementById('DataArea').value = "<no results>";
 
     parser=new DOMParser();
     var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
@@ -104,22 +105,32 @@ function getMetadata() {
 }
 
 function submitWorkflow() {
-    var reqText = 'http://129.79.44.236:8180/va-workflow/service/publishRO/'
+    var reqText = 'http://bl-uits-dsmcib2.ads.iu.edu:8180/va-workflow/service/publishRO/'
         + document.getElementById('ROSelect').value + '?psId=' + document.getElementById("instanceSelect").selectedIndex;
         document.getElementById('pingArea').value = reqText; 
+    document.getElementById('DataArea').value = "<no results>";
     var xhr = new XMLHttpRequest();
     xhr.open("GET", reqText, false);
     xhr.setRequestHeader('Content-Type', 'text/plain');
     xhr.send();
 
-    document.getElementById('DataArea').value = "<no results>";
 
     parser=new DOMParser();
     var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
     document.getElementById('DataArea').value = xhr.responseText;    
+    ROID = document.getElementById('DataArea').value;
+    ROID = ROID.substr(44,11);
+}
+
+function OpenGraph(url) {
+  url = url + 'http%3A%2F%2F' + ROID;
+  document.getElementById('pingArea').value = url;   
+  var win = window.open(url, '_blank');
+  win.focus();
 }
 
 function OpenInNewTab(url) {
+  document.getElementById('pingArea').value = url;   
   var win = window.open(url, '_blank');
   win.focus();
 }
@@ -135,7 +146,11 @@ function OpenInNewTab(url) {
     &nbsp;
     <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_MMtest')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
     &nbsp;
-    <button id="workflow-button" onclick="OpenInNewTab('http://129.79.44.236:8180/examples/jsp/graph.html')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
+    
+<!--    
+    <button id="workflow-button" onclick="OpenInNewTab('http://bl-uits-dsmcib2.ads.iu.edu:8180/examples/jsp/graph.html')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
+-->    
+    <button id="workflow-button" onclick="OpenGraph('http://bl-uits-dsmcib2.ads.iu.edu:8180/ro/resource/getStatus/')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
     &nbsp;    
     <textarea readonly id="pingArea" name="pingArea" rows="1" cols="30">&nbsp; </textarea> 
     <p></p>
