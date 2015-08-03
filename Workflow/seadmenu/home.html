@@ -120,6 +120,7 @@ function submitWorkflow() {
     document.getElementById('DataArea').value = xhr.responseText;    
     ROID = document.getElementById('DataArea').value;
     ROID = ROID.substr(44,11);
+    document.getElementById('roidArea').value = ROID;       
 }
 
 function OpenGraph(url) {
@@ -141,18 +142,20 @@ function OpenInNewTab(url) {
 
     <h2>&nbsp;SEAD 2.0 Curation & Publishing Workflow testing environment</h2>  
 
+
+
     &nbsp;
     <button id="workflow-button" onclick="pingWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Ping Workflow</button>
     &nbsp;
     <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_MMtest')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
     &nbsp;
     
-<!--    
-    <button id="workflow-button" onclick="OpenInNewTab('http://bl-uits-dsmcib2.ads.iu.edu:8180/examples/jsp/graph.html')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
--->    
     <button id="workflow-button" onclick="OpenGraph('http://bl-uits-dsmcib2.ads.iu.edu:8180/ro/resource/getStatus/')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
-    &nbsp;    
-    <textarea readonly id="pingArea" name="pingArea" rows="1" cols="30">&nbsp; </textarea> 
+    &nbsp;
+    <textarea  id="roidArea" name="roidArea" rows="1" cols="11"></textarea> 
+
+    &nbsp;        
+    <textarea readonly id="pingArea" name="pingArea" rows="2" cols="60">&nbsp; </textarea> 
     <p></p>
 </div>    
      
@@ -165,10 +168,13 @@ function OpenInNewTab(url) {
         &nbsp;    
     <select id="ROSelect">
         <option selected disabled>Select a Research Object:</option>
-        <option value="tag:medici@uiuc.edu,2009:col_SqW5XUYSfhZ627ghxBfaMQ">demo1</option>
-        <option value="tag:medici@uiuc.edu,2009:col_sdU-5eGX8Pc9mq-IZ0GfKg">Dharma's IDCC 2015 collection</option>
-        <option value="tag:medici@uiuc.edu,2009:col_y6NZYYfVgEfkAAY8bto9ng">1261_bundle</option>
-        <option value="x">Some messed up RO to test errors</option>
+        <option value="tag:medici@uiuc.edu,2009:col_SqW5XUYSfhZ627ghxBfaMQ">demo1 (1)</option>
+        <option value="tag:medici@uiuc.edu,2009:col_sdU-5eGX8Pc9mq-IZ0GfKg">Dharma's IDCC 2015 collection (1)</option>
+        <option value="tag:medici@uiuc.edu,2009:col_y6NZYYfVgEfkAAY8bto9ng">1261_bundle (1)</option>
+        <option value="tag%3Acet.ncsa.uiuc.edu%2C2008%3A%2Fbean%2FCollection%2F8c2bbe1a-f176-46c3-9890-36f4ad0c42d0">NortekVectrino_downstream
+(2)</option>
+        <option value="tag%3Acet.ncsa.uiuc.edu%2C2008%3A%2Fbean%2FCollection%2F24f9c204-3827-4d5c-bd8d-0ec24eb4a685">Vectrino_downstream
+(2)</option>
     </select>    
         &nbsp;
         <select id="instanceSelect">
@@ -176,7 +182,6 @@ function OpenInNewTab(url) {
         <option value="https://sead-test.ncsa.illinois.edu/acr">SEAD Beta Test Site</option>
         <option value="https://nced.ncsa.illinois.edu/acr">National Center for Earth-surface Dynamics</option>
         <option value="https://sen.ncsa.illinois.edu/acr">Sediment Experimentalist Network</option>
-        <option value="x">Some messed up RO to test errors</option>
     </select>    
         &nbsp;
     <textarea readonly id="DataArea" name="DataArea" rows="15" cols="60">&nbsp; </textarea> 

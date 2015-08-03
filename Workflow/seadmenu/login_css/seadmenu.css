@@ -189,17 +189,32 @@ textarea
 	font-weight: bold;
 	font-size: .8em;
 	line-height: 24px;    
-    width:100%;
+    width:97%;
     resize: none;  
     margin-top: -25px; 
     margin-bottom: auto; 
-vertical-align: middle;
-
+    vertical-align: middle;
     overflow: auto;
     outline: none;
-    
 	border: none;
+	box-shadow: none;
+}
 
+#roidArea
+{
+    background-color : #ffffff; 
+	color: #999;
+	font-weight: bold;
+	font-size: .8em;
+	line-height: 18px;    
+    width:10%;
+    resize: none;  
+    margin-top: 1px; 
+    margin-bottom: auto; 
+    vertical-align: middle;
+    overflow: auto;
+    outline: none;
+	border: none;
 	box-shadow: none;
 }
 
