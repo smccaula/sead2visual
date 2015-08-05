@@ -159,15 +159,19 @@ function OpenInNewTab(url) {
     <span>&nbsp;SEAD 2.0 C3P-R testing dashboard</span>
 </h2>
 
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Curate. Prepare. Package. Publish. Research</h3>
+
     &nbsp;
-    <button id="workflow-button" onclick="pingWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Ping Workflow</button>
+    <button id="workflow-button" onclick="pingWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Ping C3P-R</button>
     &nbsp;
-    <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_Request')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
+    <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
     &nbsp;
     
-    <button id="workflow-button" onclick="OpenGraph('http://bl-uits-dsmcib2.ads.iu.edu:8180/ro/resource/getStatus/')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
+    <button id="workflow-button" onclick="OpenGraph('http://bl-uits-dsmcib2.ads.iu.edu:8180/ro/resource/getStatus/')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Status Graph</button>    
     &nbsp;
     <button id="workflow-button" onclick="OpenPDT()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>PDT</button>    
+    &nbsp;
+    <button id="workflow-button" onclick="OpenInNewTab(document.getElementById('instanceSelect').value)"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>ACR</button>       
     &nbsp;
     <textarea  id="roidArea" name="roidArea" rows="1" cols="11"></textarea> 
 
@@ -192,6 +196,7 @@ function OpenInNewTab(url) {
 (2)</option>
         <option value="tag%3Acet.ncsa.uiuc.edu%2C2008%3A%2Fbean%2FCollection%2F24f9c204-3827-4d5c-bd8d-0ec24eb4a685">Vectrino_downstream
 (2)</option>
+        
     </select>    
         &nbsp;
         <select id="instanceSelect">

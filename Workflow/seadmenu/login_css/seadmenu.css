@@ -245,7 +245,16 @@ h2{
     margin-top: -30px; 
     margin-bottom: -30px; 
     overflow: auto;    
+    font-style:bold;
 }
+
+h3{
+    margin-top: -40px; 
+    margin-bottom: -0px; 
+    width:90%;
+    overflow: auto;    
+    font-style:italic;
+   float: right;  }
 
 h2 span{
    float: left;
@@ -255,6 +264,6 @@ h2 span{
 
 h2 img{
    float: right;   
-    margin-right: 250px;
+    margin-right: 300px;
     margin-top: -0px;
 }
