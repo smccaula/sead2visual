@@ -130,6 +130,20 @@ function OpenGraph(url) {
   win.focus();
 }
 
+function OpenPDT() {
+    var reqText = 'http://bl-uits-dsmcib2.ads.iu.edu:8180/sead-pdt/RO/byid?id=' + 'http%3A%2F%2F' + ROID;
+    document.getElementById('pingArea').value = reqText; 
+    document.getElementById('DataArea').value = "<no results>";
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", reqText, false);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.send();
+
+    parser=new DOMParser();
+    var xmlDoc=parser.parseFromString(xhr.responseText,"text/xml"); 
+    document.getElementById('DataArea').value = xhr.responseText;
+}
+
 function OpenInNewTab(url) {
   document.getElementById('pingArea').value = url;   
   var win = window.open(url, '_blank');
@@ -140,17 +154,20 @@ function OpenInNewTab(url) {
     
 <div id="myoutercontainer">
 
-    <h2>&nbsp;SEAD 2.0 Curation & Publishing Workflow testing environment</h2>  
-
-
+<h2>
+    <img src="kitty.png"> 
+    <span>&nbsp;SEAD 2.0 C3P-R testing dashboard</span>
+</h2>
 
     &nbsp;
     <button id="workflow-button" onclick="pingWorkflow()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Ping Workflow</button>
     &nbsp;
-    <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_MMtest')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
+    <button id="workflow-button" onclick="OpenInNewTab('http://seadva-test.d2i.indiana.edu:15672/#/queues/%2F/MatchmakerQueue_Request')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Rabbit MQ</button>    
     &nbsp;
     
     <button id="workflow-button" onclick="OpenGraph('http://bl-uits-dsmcib2.ads.iu.edu:8180/ro/resource/getStatus/')"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>Workflow Graph</button>    
+    &nbsp;
+    <button id="workflow-button" onclick="OpenPDT()"><img id="sead-logo" src="sead2020.png" width='24' height='24' alt="SEAD logo"/>PDT</button>    
     &nbsp;
     <textarea  id="roidArea" name="roidArea" rows="1" cols="11"></textarea> 
 
